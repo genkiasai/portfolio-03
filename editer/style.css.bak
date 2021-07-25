@@ -1,0 +1,326 @@
+/* 共通ここから */
+.row {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body {
+    /* box-sizing: border-box;
+    background-image: url("./images/background-lg.png");
+    background-attachment: fixed; */
+    color: #000 !important;
+}
+
+header {
+    /* border-bottom: 1px solid #fff; */
+    background-color: #000;
+}
+
+nav {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.inner {
+    text-align: left;
+    width: 60%;
+    margin: 0 auto 40px auto;
+}
+
+.wrapper__h2 {
+    color: #000;
+    /* margin-bottom: 30px; */
+    padding: 40px 0 10px 0;
+    display: inline-block;
+    /* border-bottom: 2px solid #fff; */
+    font-size: 1.5rem;
+}
+
+.h2-submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+/* 共通ここまで */
+
+/* headerここから */
+.nav-pc {
+    width: 100%;
+}
+
+.header__company-name {
+    display: inline-block;
+    width: 80%;
+    padding: 10px 0;
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.header__company-name:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.header__menu {
+    width: 60%;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 0;
+    display: inline-block;
+    font-size: .7em;
+    transition-property: letter-spacing, width;
+    /* transition-timing-function: 1s; */
+    transition-duration: .4s;
+}
+
+.header__menu:hover {
+    width: 100%;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: 4px;
+}
+
+.header__contents {
+    display: inline-block;
+}
+
+.header__contents-2 {
+    text-align: center;
+}
+
+.navbar-light .navbar-toggler {
+    /* color: rgba(0,0,0,.5); */
+    /* border-color: rgba(0,0,0,.1); */
+    color: #fff;
+    background-color: #fff;
+}
+
+.bg-light {
+    background-color: #000 !important;
+}
+
+.navbar {
+    width: 100%;
+    color: #fff !important;
+    background-color: #000 !important;
+}
+
+.nav__logo-name_bold,
+.nav__logo-name_nomal {
+    color: #fff;
+}
+
+.nav-link {
+    color: #fff !important;
+}
+
+.nav-mobile {
+    display: none !important;
+}
+
+.navbar {
+    padding: 0 !important;
+    display: block !important;
+}
+
+.toggle,
+.menu-list {
+    padding: 0 1rem;
+    display: none !important;
+}
+
+.toggle {
+    padding-top: .5rem;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-collapse {
+    padding-bottom: .5rem;
+}
+/* headerここまで */
+
+/* index.phpここから */
+/* mainここから */
+.menu-button-area {
+    display: flex;
+    margin: 40px auto 0 auto;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.menu-button {
+    display: inline-block;
+    width: 20%;
+    border: 1px solid #000;
+    border-radius: 3px 3px;
+    background-color: #ddd;
+    padding: 40px 0;
+    text-align: center;
+    color: #000;
+    font-size: .9em;
+    font-weight: bold;
+    transition-property: background-color, text-shadow;
+    transition-duration: .5s;
+}
+
+.menu-button:hover {
+    text-decoration: none;
+    color: #000;
+    background-color: #fff;
+    text-shadow: 0 4px 10px  rgba(0, 0, 0, .8);
+}
+/* mainここまで */
+/* index.phpここまで */
+
+/* top-page.phpここから */
+.main__top-page {
+    padding-bottom: 60px;
+}
+/* wrapper-1ここから */
+.text,
+.textarea {
+    width: 100%;
+    margin-top: 4px;
+}
+/* wrapper-1ここまで */
+
+/* wrapper-2ここから */
+.info-area-1-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-area-2 {
+    margin-top: 16px;
+    border: 1px solid #000;
+    width: 100%;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.info-inner {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.now-info {
+    border-bottom: 1px solid #000;
+    margin-top: 10px;
+}
+
+.sentence-button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sentence {
+    display: flex;
+    align-items: flex-end;
+}
+/* wrapper-2ここまで */
+
+/* wrapper-3ここから */
+.textarea__message {
+    width: 100%;
+}
+/* wrapper-3ここまで */
+
+/* wrapper-4ここから */
+.accsess__item {
+    margin-bottom: 10px;
+}
+
+.text__access {
+    margin-top: 0 !important;
+}
+/* wrapper-4ここまで */
+
+/* save-areaここから */
+.save-area {
+    background-color: #000;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: left;
+}
+
+.save-message {
+    display: inline-block;
+    width: 30%;
+    color: #fff;
+    text-align: right;
+    font-size: 1.1rem;
+}
+
+.submit__save {
+    width: 30%;
+    margin: 10px 0;
+    padding: 10px 40px;
+    font-size: 1.5rem;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    box-shadow: 0px 2px 5px rgb(255 255 255 / 80%);
+}
+/* save-areaここまで */
+
+/* top-page.phpここまで */
+
+/* iPad以下 */
+@media screen and (max-width: 768px) {
+    /* 共通ここから */
+    html {
+        font-size: 12px;
+    }
+
+    .inner {
+        width: 90%;
+    }
+    .wrapper__h2 {
+        font-size: 1.5rem;
+        padding: 20px 0 5px 0;
+    }
+    /* 共通ここまで */
+
+    /* headerここから */
+    .nav-pc {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-mobile {
+        display: block;
+    }
+
+    .toggle {
+        display: flex !important;
+        padding: 10px;
+    }
+
+    .menu-list {
+        display: block !important;
+    }
+    /* headerここまで */
+
+    .menu-button {
+        width: 40%;
+        font-size: .6em;
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    html {
+        font-size: 8px;
+    }
+
+    .inner {
+        width: 95%;
+    }
+}
+
