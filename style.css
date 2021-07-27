@@ -239,23 +239,6 @@ nav {
     order: 1;
 }
 
-.arrow-area {
-    width: 10%;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-}
-
-.arrow-area-1 {
-    left: 0;
-}
-
-.arrow-area-2 {
-    right: 0;
-}
-
 .image-area {
     position: relative;
     width: 21%;
@@ -269,31 +252,8 @@ nav {
     box-shadow: 0 0 10px 10px rgba(255, 255, 255, .4);
 }
 
-/* .image-area-2 {
-    margin: 0 20px 0 40px;
-}
-
-.image-area-3 {
-    margin: 0 40px 0 20px;
-} */
-
 .image {
     width: 100%;
-}
-
-.view-more {
-    color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0);
-    transition-property: border, padding;
-    transition-duration: .5s;
-    font-size: 1.5rem;
-}
-
-.view-more:hover {
-    padding: 10px 20px;
-    border: 1px solid #fff;
-    text-decoration: none;
-    color: #fff;
 }
 
 .intro {
@@ -552,10 +512,6 @@ nav {
     /* wrapper-4ここまで */
 
     /* wrapper-5ここから */
-    .menu {
-        height: 450px;
-    }
-
     .item_menu {
         font-size: 1.5rem;
     }
@@ -580,10 +536,6 @@ nav {
     }
     /* wrapper-3ここまで */
     /* wrapper-5ここから */
-    .menu {
-        height: 450px;
-    }
-
     .inner__menu {
         width: 80%;
     }
@@ -628,7 +580,8 @@ nav {
     color: #fff;
     font-weight: bold;
     border: 2px solid #fff;
-    transition-property: box-shadow;
+    opacity: .2;
+    transition-property: box-shadow, opacity;
     transition-duration: .4s;
 }
 
@@ -636,5 +589,6 @@ nav {
     color: #fff;
     text-decoration: none;
     box-shadow: 0 0 20px rgba(0, 0, 0, .7);
+    opacity: 1;
 }
 /* 編集画面ボタン@TODO 一時的 */

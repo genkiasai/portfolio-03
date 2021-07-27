@@ -30,7 +30,7 @@ try {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css?ver=0.6">
+    <link rel="stylesheet" href="./style.css?ver=0.7">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>ポートフォリオ</title>
 </head>
@@ -103,7 +103,7 @@ try {
     <main>
         <!-- 編集画面ボタン@TODO 一時的 -->
         <div class="button__edit">
-            <a class="button__edit--a" href="./editer/index.php">編集画面<br>（一時的）</a>
+            <a class="button__edit--a" href="./editer/index.php">編集画面へ移動<br>（一時的）</a>
         </div>
         <!-- /編集画面ボタン@TODO 一時的 -->
 
@@ -138,13 +138,11 @@ try {
                     <?php $i = 1; ?>
                     <?php foreach ($cats as $cat) : ?>
                         <div class="image-area image-area-<?php echo h($i); ?>">
-                            <a class="cat" href="./">
-                                <img class="image" src=<?php echo h($cat["image"]) ?> alt=<?php echo h($cat["name"]); ?>>
-                                <div class="intro intro-<?php echo h($i); ?>">
-                                    <p class="no-margin"><?php echo h($cat["name"]); ?></p>
-                                    <p class="no-margin"><?php echo h($cat["gender"]) . "　" . h(dateDiff($cat["birthday"])); ?></p>
-                                </div>
-                            </a>
+                            <img class="image" src=<?php echo h($cat["image"]) ?> alt=<?php echo h($cat["name"]); ?>>
+                            <div class="intro intro-<?php echo h($i); ?>">
+                                <p class="no-margin"><?php echo h($cat["name"]); ?></p>
+                                <p class="no-margin"><?php echo h($cat["gender"]) . "　" . h(dateDiff($cat["birthday"])); ?></p>
+                            </div>
                         </div>
                         <?php $i++; ?>
                     <?php endforeach; ?>

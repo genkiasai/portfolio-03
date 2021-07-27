@@ -1,5 +1,6 @@
 <?php
-    
+    // タイムゾーン設定
+    date_default_timezone_set ('Asia/Tokyo');
     // 入力確認
     //////////////////////////////
     function inputCheck ($post) {
@@ -83,8 +84,8 @@
             }
             
             // 写真
-            if (empty($post["image"])) {
-                $post["error_cat"]["image"] = "none";
+            if (empty($post["save_image"])) {
+                $post["error_cat"]["save_image"] = "none";
             }
 
 

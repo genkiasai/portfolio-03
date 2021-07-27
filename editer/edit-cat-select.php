@@ -1,13 +1,41 @@
+<?php
+try {
+    session_start();
+    require("../dbconnect.php");
+    require("../CCommon.php");
+
+    // 猫ちゃん読み込み
+    $cats = $db->prepare("SELECT * FROM cats ORDER BY id DESC");
+    $cats->execute();
+} catch (Exception $e) {
+    echo "エラー：" . $e->getMessage();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css?ver=1.2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <link rel="stylesheet" href="./style.css?ver=1.6">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>編集画面</title>
+    <title>@TODO</title>
+
+    <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no"> -->
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <!-- <link rel="stylesheet" href="css/base/reset.css" type="text/css">
+    <link rel="stylesheet" href="css/base/layout.css" type="text/css"> -->
+    <link rel="stylesheet" href="css/vendor/cropper.css" type="text/css">
+    <!-- <link rel="stylesheet" href="css/vendor/bootstrap.min.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="css/page/trimming.css" type="text/css"> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -61,7 +89,7 @@
                             <a class="nav-link" href="./record-cat.php">猫ちゃん登録</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"href="./edit-cat-select.php">猫ちゃん編集</a>
+                            <a class="nav-link" href="./edit-cat-select.php">猫ちゃん編集</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#scroll-5">出勤ステータス</a>
@@ -75,21 +103,42 @@
         </nav>
     </header>
 
-    <main>
-        <div class="menu-button-area">
-            <a class="menu-button" href="./record-cat.php">猫ちゃん登録</a>
-            <a class="menu-button" href="./edit-cat-select.php">猫ちゃん編集</a>
-            <a class="menu-button" href="#">出勤ステータス</a>
-            <a class="menu-button" href="./edit-top.php">トップページ編集</a>
-        </div>
+    <main class="main__top-page">
+        <h1 class="edit__h1">猫ちゃん編集画面</h1>
+        <form action="" method="POST">
+            <div class="wrapper wrapper-1">
+                <div class="inner">
+                    <?php $i = 1; ?>
+                    <div class="images-area images-area-1">
+                        <?php foreach ($cats as $cat) : ?>
+                            <div class="image-area image-area-<?php echo h($i); ?>">
+                                <a class="cat" href="./edit-cat.php?id=<?php echo $cat["id"]; ?>">
+                                    <img class="image" src=<?php echo "." . h($cat["image"]) ?> alt=<?php echo h($cat["name"]); ?>>
+                                    <div class="intro intro-<?php echo h($i); ?>">
+                                        <p class="no-margin"><?php echo h($cat["name"]); ?></p>
+                                        <p class="no-margin"><?php echo h($cat["gender"]) . "　" . h(dateDiff($cat["birthday"])); ?></p>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php $i++; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </form>
     </main>
 
+    <!-- bootstrap ver5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
+    <script src="js/vendor/cropper.js"></script>
+    <script src="js/page/trimming.js?ver=0.1"></script>
 </body>
 
 </html>

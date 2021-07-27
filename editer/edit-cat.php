@@ -9,41 +9,62 @@ try {
         $post = inputCheck($_POST);
     }
 
+    // データベース読み込み
+    $id = $_GET["id"];
+    if (!empty($id)) {
+        $cats = $db->prepare("SELECT * FROM cats WHERE id=?");
+        $cats->execute(array(
+            $id
+        ));
+        $cat = $cats->fetch(pdo::FETCH_ASSOC);
+        $cat["birthday"] = explode("-", $cat["birthday"])[0] . "-" . explode("-", $cat["birthday"])[1];
+    }
+
     // データベース書き込み
     if (!isset($post["error_cat"]) && isset($_POST["save"])) {
-        // 保存するファイル名をidから取得
-        $id = $db->prepare("SELECT MAX(id) FROM cats");
-        $id->execute();
-        $file_name = $id->fetch(PDO::FETCH_ASSOC);
-        $file_name = (int)$file_name["MAX(id)"] + 1;
-        if (strlen($file_name) === 1) {
-            $file_name = "000" . $file_name;
-        } elseif (strlen($file_name) === 2) {
-            $file_name = "00" . $file_name;
-        } elseif (strlen($file_name) === 3) {
-            $file_name = "0" . $file_name;
+        // 画像データに変更が加えられていたら
+        if ((substr($_POST["save_image"], -4, 1) !== ".") && (substr($_POST["save_image"], -3, 1) !== ".")) {
+            // base64の画像データを保存
+            if (!file_exists("../cats/")) {
+                mkdir("../cats/");
+            }
+            $img = $_POST["save_image"];
+            $img = str_replace("data:image/png;base64,", "", $img);
+            $img = str_replace(" ", "+", $img);
+            $save_image = base64_decode($img);
+            // 保存するファイル名をidから取得
+            $file_name = $cat["id"];
+            if (strlen($file_name) === 1) {
+                $file_name = "000" . $file_name;
+            } elseif (strlen($file_name) === 2) {
+                $file_name = "00" . $file_name;
+            } elseif (strlen($file_name) === 3) {
+                $file_name = "0" . $file_name;
+            }
+            // キャッシュに影響されないように日時情報をつけて保存
+            $file_name = "./cats/" . $file_name . "_" . date("YmdHis") . ".jpg";
+            file_put_contents("." . $file_name, $save_image);
+
+            // 元のデータを削除
+            unlink("." . $cat["image"]);
+
+        } else {
+            $file_name = $cat["image"];
         }
 
-        // データベース書き込み
-        $post["image"] = "./cats/" . $file_name . ".jpg";
-        $write = $db->prepare("INSERT INTO cats SET name=?, gender=?, birthday=?, image=?");
+        $write = $db->prepare("UPDATE cats SET name=?, gender=?, birthday=?, image=? WHERE id=$id");
         $write->execute(array(
-            $post["name"],
-            $post["gender"],
-            $post["birthday"] . "-01",
-            $post["image"]
+            $_POST["name"],
+            $_POST["gender"],
+            $_POST["birthday"] . "-01",
+            $file_name
         ));
 
-        // base64の画像データを保存
-        if (!file_exists("../cats/")) {
-            mkdir("../cats/");
-        }
-        $img = $_POST["save_image"];
-        $img = str_replace("data:image/png;base64,", "", $img);
-        $img = str_replace(" ", "+", $img);
-        $save_image = base64_decode($img);
-        file_put_contents("../cats/" . $file_name . ".jpg", $save_image);
-        // move_uploaded_file($_POST["save_image"], "../cats/" . $file_name . ".jpg");
+        // 表示データ更新
+        $cat["name"] = $_POST["name"];
+        $cat["gender"] = $_POST["gender"];
+        $cat["birthday"] = $_POST["birthday"];
+        $cat["image"] = $file_name;
 
     }
 } catch (Exception $e) {
@@ -143,20 +164,20 @@ try {
     </header>
 
     <main class="main__top-page">
-        <h1 class="edit__h1">猫ちゃん登録画面</h1>
+        <h1 class="edit__h1">猫ちゃん編集画面</h1>
         <form action="" method="POST">
             <div class="wrapper wrapper-1">
                 <div class="inner inner__record-cat inner-1">
                     <div class="item item-1">
                         <div class="item-name">名前</div>
                         <?php if (!empty($post["error"]["name"]) && $post["error"]["name"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                        <div class="input-area"><input class="input__record-cat name text__record-cats" id="name" name="name" type="text" placeholder="名前"></div>
+                        <div class="input-area"><input class="input__record-cat name text__record-cats" id="name" name="name" type="text" value=<?php echo $cat["name"]; ?> placeholder="名前"></div>
                     </div>
 
                     <div class="item item-2">
                         <div class="item-name">誕生日</div>
                         <?php if (!empty($post["error"]["birthday"]) && $post["error"]["birthday"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="month"></div>
+                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="month" value=<?php echo $cat["birthday"]; ?>></div>
                     </div>
 
                     <div class="item item-3">
@@ -164,8 +185,8 @@ try {
                         <?php if (!empty($post["error"]["gender"]) && $post["error"]["gender"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
                         <div class="input-area">
                             <select class="gender select__gender" id="gender" name="gender">
-                                <option value="オス">オス</option>
-                                <option value="メス">メス</option>
+                                <option value="オス" <?php if ($cat["gender"] === "オス") echo "selected"; ?>>オス</option>
+                                <option value="メス" <?php if ($cat["gender"] === "メス") echo "selected"; ?>>メス</option>
                             </select>
                         </div>
                     </div>
@@ -178,19 +199,20 @@ try {
                         </div>
                     </div>
 
-                    <img class="js-trimmedImg" id="preview" src="" alt="">
-                    <input class="save_image" id="save_image" type="hidden" name="save_image" value="">
+                    <!-- 画像 -->
+                    <img class="js-trimmedImg" id="preview" src=<?php echo "." . $cat["image"]; ?> alt="">
+                    <input class="save_image" id="save_image" type="hidden" name="save_image" value=<?php echo "." . $cat["image"]; ?>>
 
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#myModal" style="display:none">
                     </button>
-                    <div class="modal fade js-trimmingModal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade js-trimmingModal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">トリミンングしてください</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="trimming-area">
