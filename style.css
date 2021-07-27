@@ -576,19 +576,24 @@ nav {
 
 /* iPhoneX以下 */
 @media screen and (max-width: 376px) {
-        /* wrapper-5ここから */
-        .menu {
-            height: 450px;
-        }
+    /* wrapper-3ここから */
+    .intro {
+        font-size: .6rem;
+    }
+    /* wrapper-3ここまで */
+    /* wrapper-5ここから */
+    .menu {
+        height: 450px;
+    }
 
-        .inner__menu {
-            width: 80%;
-        }
-    
-        .item_menu {
-            font-size: 1.2rem;
-        }
-        /* wrapper-5ここまで */
+    .inner__menu {
+        width: 80%;
+    }
+
+    .item_menu {
+        font-size: 1.2rem;
+    }
+    /* wrapper-5ここまで */
 }
 /* index.phpここまで */
 

@@ -100,4 +100,15 @@
         return htmlspecialchars($str, ENT_QUOTES, "utf-8");
     }
 
+    
+    // 年齢算出
+    //////////////////////////////
+    function dateDiff ($birthDay) {
+        $today = new DateTime('now');
+        $birthDay = new DateTime($birthDay);
+        $diff = $today->diff($birthDay);
+        $age = $diff->y . "才" . $diff->m . "ヶ月";
+        return $age;
+    }
+
 ?>

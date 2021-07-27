@@ -12,30 +12,34 @@ try {
     // データベース書き込み
     if (!isset($post["error_cat"]) && isset($_POST["save"])) {
         // 保存するファイル名をidから取得
-        $id = $db->prepare("SELECT COUNT(id) FROM cats");
+        $id = $db->prepare("SELECT MAX(id) FROM cats");
         $id->execute();
-        (string)$file_name = $id->fetch(PDO::FETCH_ASSOC);
-        if (strlen($file_name["COUNT(id)"]) === 1) {
-            $file_name = "000" . $file_name["COUNT(id)"];
-        } elseif(strlen($file_name["COUNT(id)"]) === 2) {
-            $file_name = "00" . $file_name["COUNT(id)"];
-        } elseif(strlen($file_name["COUNT(id)"]) === 3) {
-            $file_name = "0" . $file_name["COUNT(id)"];
+        $file_name = $id->fetch(PDO::FETCH_ASSOC);
+        $file_name = (int)$file_name["MAX(id)"] + 1;
+        if (strlen($file_name) === 1) {
+            $file_name = "000" . $file_name;
+        } elseif (strlen($file_name) === 2) {
+            $file_name = "00" . $file_name;
+        } elseif (strlen($file_name) === 3) {
+            $file_name = "0" . $file_name;
         }
-        
+
         // データベース書き込み
         $post["image"] = "./cats/" . $file_name . ".jpg";
         $write = $db->prepare("INSERT INTO cats SET name=?, gender=?, birthday=?, image=?");
         $write->execute(array(
             $post["name"],
             $post["gender"],
-            $post["birthday"],
+            $post["birthday"] . "-01",
             $post["image"]
         ));
 
         // base64の画像データを保存
+        if (!file_exists("../cats/")) {
+            mkdir("../cats/");
+        }
         $img = $_POST["save_image"];
-        $img = str_replace("", "", $img);
+        $img = str_replace("data:image/png;base64,", "", $img);
         $img = str_replace(" ", "+", $img);
         $save_image = base64_decode($img);
         file_put_contents("../cats/" . $file_name . ".jpg", $save_image);
@@ -55,7 +59,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
     <link rel="stylesheet" href="./style.css?ver=1.6">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>@TODO</title>
 
     <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
@@ -66,8 +70,8 @@ try {
     <!-- <link rel="stylesheet" href="css/base/reset.css" type="text/css">
     <link rel="stylesheet" href="css/base/layout.css" type="text/css"> -->
     <link rel="stylesheet" href="css/vendor/cropper.css" type="text/css">
-    <!-- <link rel="stylesheet" href="css/vendor/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/page/trimming.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="css/vendor/bootstrap.min.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" href="css/page/trimming.css" type="text/css"> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -152,31 +156,19 @@ try {
                     <div class="item item-2">
                         <div class="item-name">誕生日</div>
                         <?php if (!empty($post["error"]["birthday"]) && $post["error"]["birthday"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="date"></div>
+                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="month"></div>
                     </div>
 
                     <div class="item item-3">
                         <div class="item-name">性別</div>
                         <?php if (!empty($post["error"]["gender"]) && $post["error"]["gender"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
                         <div class="input-area">
-                        <select class="gender select__gender" id="gender" name="gender">
-                            <option value="オス">オス</option>
-                            <option value="メス">メス</option>
-                        </select>
+                            <select class="gender select__gender" id="gender" name="gender">
+                                <option value="オス">オス</option>
+                                <option value="メス">メス</option>
+                            </select>
+                        </div>
                     </div>
-                    </div>
-
-                    <!-- <div class="item item-4">
-                        <div class="item-name">趣味</div>
-                        <div class="input-area"><input class="hobby text__record-cats" id="hobby" name="hobby[]" type="text"></div>
-                        <div class="add add__hobby">追加</div>
-                    </div>
-                    
-                    <div class="item item-5">
-                        <div class="item-name">休日の過ごし方</div>
-                        <div class="input-area"><input class="spend text__record-cats" id="spend" name="spend[]" type="text"></div>
-                        <div class="add add__spend">追加</div>
-                    </div> -->
 
                     <div class="item item-3">
                         <div class="item-name">写真</div>
@@ -211,30 +203,6 @@ try {
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-                    <!-- 追加要素 -->
-                    <!-- <div class="item item__hobby" style="display: none;">
-                        <div class="item-name"></div>
-                        <div class="input-area"><input class="hobby text__record-cats" id="hobby-" name="hobby[]" type="text"></div>
-                        <div class="dummy"></div>
-                    </div>
-
-                    <div class="item item__spend" style="display: none;">
-                        <div class="item-name"></div>
-                        <div class="input-area"><input class="spend text__record-cats" id="spend-" name="spend[]" type="text"></div>
-                        <div class="dummy"></div>
-                    </div> -->
-
-
-
                 </div>
             </div>
             <div class="save-area">
@@ -250,21 +218,13 @@ try {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
     <script src="js/vendor/cropper.js"></script>
     <script src="js/page/trimming.js?ver=0.1"></script>
-    <script>
-        $(".add__hobby").click(function() {
-            $html = $(".item__hobby").eq(0).html();
-            $(".item-4").append($html);
-        });
-
-        $(".add__spend").click(function() {
-            $html = $(".item__spend").eq(0).html();
-            $(".item-5").append($html);
-        });
-    </script>
 </body>
 
 </html>

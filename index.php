@@ -30,7 +30,7 @@ try {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css?ver=0.5">
+    <link rel="stylesheet" href="./style.css?ver=0.6">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>ポートフォリオ</title>
 </head>
@@ -135,62 +135,20 @@ try {
             <div class="inner inner-3">
                 <h2 class="wrapper__h2">猫たちの紹介</h2>
                 <div class="images-area images-area-1">
-                    <!-- <div class="arrow-area arrow-area-1"><a href="./"><img class="arrow-previous" src="./images/arrow-previous.png" alt=""></a></div> -->
-                    <div class="image-area image-area-1"><a class="therapist" href="./"><img class="image" src="./cats/cat01.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">とらじろう</p>
-                                <p class="no-margin">オス　5才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-2"><a class="therapist" href="./"><img class="image" src="./cats/cat02.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">ごんべえ</p>
-                                <p class="no-margin">オス　5才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-3"><a class="therapist" href="./"><img class="image" src="./cats/cat03.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">たまえ</p>
-                                <p class="no-margin">メス　3才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-4"><a class="therapist" href="./"><img class="image" src="./cats/cat04.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">ぽんた</p>
-                                <p class="no-margin">オス　3才</p>
-                            </div>
-                        </a></div>
-                    <!-- <div class="arrow-area arrow-area-2"><a href="./"><img class="arrow-previous" src="./images/arrow-next.png" alt=""></a></div> -->
-                    <!-- </div>
-                <div class="images-area images-area-2"> -->
-                    <!-- <div class="arrow-area arrow-area-1"><a href="./"><img class="arrow-previous" src="./images/arrow-previous.png" alt=""></a></div> -->
-                    <div class="image-area image-area-5"><a class="therapist" href="./"><img class="image" src="./cats/cat05.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">りんごちゃん</p>
-                                <p class="no-margin">メス　2才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-6"><a class="therapist" href="./"><img class="image" src="./cats/cat06.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">ハナ</p>
-                                <p class="no-margin">メス　2才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-7"><a class="therapist" href="./"><img class="image" src="./cats/cat07.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">りく</p>
-                                <p class="no-margin">オス　4才</p>
-                            </div>
-                        </a></div>
-                    <div class="image-area image-area-8"><a class="therapist" href="./"><img class="image" src="./cats/cat08.jpg" alt="">
-                            <div class="intro intro-1">
-                                <p class="no-margin">くーちゃん</p>
-                                <p class="no-margin">メス　3才</p>
-                            </div>
-                        </a></div>
-                    <!-- <div class="arrow-area arrow-area-2"><a href="./"><img class="arrow-previous" src="./images/arrow-next.png" alt=""></a></div> -->
+                    <?php $i = 1; ?>
+                    <?php foreach ($cats as $cat) : ?>
+                        <div class="image-area image-area-<?php echo h($i); ?>">
+                            <a class="cat" href="./">
+                                <img class="image" src=<?php echo h($cat["image"]) ?> alt=<?php echo h($cat["name"]); ?>>
+                                <div class="intro intro-<?php echo h($i); ?>">
+                                    <p class="no-margin"><?php echo h($cat["name"]); ?></p>
+                                    <p class="no-margin"><?php echo h($cat["gender"]) . "　" . h(dateDiff($cat["birthday"])); ?></p>
+                                </div>
+                            </a>
+                        </div>
+                        <?php $i++; ?>
+                    <?php endforeach; ?>
                 </div>
-                <a class="view-more" href="./">View More</a>
             </div>
         </div>
         <!-- /wrapper-3 -->
@@ -255,18 +213,20 @@ try {
 
 
         <div>
-            <?php foreach ($cats as $cat) : ?>
-                <div class="image-area image-area-7">
-                    <a class="therapist" href="./"><img class="image" src="<?php $cat["image"]; ?>" alt="">
+            <?php //foreach ($cats as $cat) : 
+            ?>
+            <!-- <div class="image-area image-area-7">
+                    <a class="cat" href="./"><img class="image" src="<?php $cat["image"]; ?>" alt="">
                         <div class="intro intro-1">
                             <p class="no-margin"><?php $cat["name"] ?></p>
                             <p class="no-margin">オス　4才</p>
                         </div>
                     </a>
-                </div>
+                </div> -->
 
 
-            <?php endforeach; ?>
+            <?php //endforeach; 
+            ?>
         </div>
     </main>
 
