@@ -57,7 +57,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <link rel="stylesheet" href="./style.css?ver=1.7">
+    <link rel="stylesheet" href="./style.css?ver=1.8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>@TODO</title>
@@ -174,7 +174,9 @@ try {
                         <div class="item-name">写真</div>
                         <?php if (!empty($post["error"]["image"]) && $post["error"]["image"] === "none") echo "<div class='error' style='color:red;'>ファイルを選択してください</div>"; ?>
                         <div class="input-area">
-                            <input class="image text__record-cats js-imageFile" id="image-file" name="image" type="file" accept="image/*">
+                            <input class="image text__record-cats js-imageFile" id="image-file" name="image" type="file" accept="image/*" style="display: none">
+                            <label class="button__file" for="image-file">ファイルを選択</label>
+                            <span class="js-fileName"></span>
                         </div>
                     </div>
 
@@ -208,7 +210,7 @@ try {
             <div class="save-area">
                 <div class="save-message">
                     編集が終了したら→
-                </div>
+                </div>0
                 <input class="submit__save" id="submit__save" name="save" type="submit" value="保存">
             </div>
         </form>
@@ -224,7 +226,7 @@ try {
 
     <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
     <script src="js/vendor/cropper.js"></script>
-    <script src="js/page/trimming.js?ver=0.1"></script>
+    <script src="js/page/trimming.js?ver=0.6"></script>
 </body>
 
 </html>

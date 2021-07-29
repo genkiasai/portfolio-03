@@ -1,4 +1,5 @@
 /* 共通ここから */
+
 .row {
     margin: 0 !important;
     padding: 0 !important;
@@ -50,9 +51,41 @@ nav {
 .no-margin {
     margin: 0;
 }
+
+.inline-outside__center {
+    position: relative;
+    width: 50%;
+    height: 40px;
+    margin: 40px auto;
+}
+
+.label__delete {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: red;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 1px solid #000;
+    border-radius: 4px;
+    box-shadow: 0 2px rgb(0 0 0 / 40%);
+}
+
+.label__delete:active {
+    position: absolute;
+    top: 2px;
+    /* left: auto; */
+    box-shadow: none;
+}
+
+
 /* 共通ここまで */
 
+
 /* headerここから */
+
 .nav-pc {
     width: 100%;
 }
@@ -150,10 +183,16 @@ nav {
 .navbar-collapse {
     padding-bottom: .5rem;
 }
+
+
 /* headerここまで */
 
+
 /* index.phpここから */
+
+
 /* mainここから */
+
 .menu-button-area {
     display: flex;
     margin: 40px auto 0 auto;
@@ -181,24 +220,37 @@ nav {
     text-decoration: none;
     color: #000;
     background-color: #fff;
-    text-shadow: 0 4px 10px  rgba(0, 0, 0, .8);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, .8);
 }
+
+
 /* mainここまで */
+
+
 /* index.phpここまで */
 
+
 /* edit-top.phpここから */
+
 .main__top-page {
     padding-bottom: 60px;
 }
+
+
 /* wrapper-1ここから */
+
 .text,
 .textarea {
     width: 100%;
     margin-top: 4px;
 }
+
+
 /* wrapper-1ここまで */
 
+
 /* wrapper-2ここから */
+
 .info-area-1-1 {
     display: flex;
     justify-content: space-between;
@@ -231,15 +283,23 @@ nav {
     display: flex;
     align-items: flex-end;
 }
+
+
 /* wrapper-2ここまで */
 
+
 /* wrapper-3ここから */
+
 .textarea__message {
     width: 100%;
 }
+
+
 /* wrapper-3ここまで */
 
+
 /* wrapper-4ここから */
+
 .accsess__item {
     margin-bottom: 10px;
 }
@@ -247,9 +307,13 @@ nav {
 .text__access {
     margin-top: 0 !important;
 }
+
+
 /* wrapper-4ここまで */
 
+
 /* save-areaここから */
+
 .save-area {
     background-color: #000;
     position: fixed;
@@ -276,12 +340,19 @@ nav {
     border: 2px solid #fff;
     box-shadow: 0px 2px 5px rgb(255 255 255 / 80%);
 }
+
+
 /* save-areaここまで */
+
 
 /* edit-top.phpここまで */
 
+
 /* edit-status.phpここから */
+
+
 /* wrapper-1ここから */
+
 .submit-change-area {
     text-align: center;
     margin-top: 40px;
@@ -290,8 +361,13 @@ nav {
 #change {
     padding: 10px 20px;
 }
+
+
 /* wrapper-1ここまで */
+
+
 /* wrapper-2ここから */
+
 .table {
     margin-bottom: 10px;
 }
@@ -303,11 +379,19 @@ nav {
 .table {
     text-align: center;
 }
+
+
 /* wrapper-2ここまで */
+
+
 /* edit-status.phpここまで */
 
+
 /* record-cat.phpここから */
+
+
 /* wrapper-1ここから */
+
 .inner__record-cat {
     width: 30% !important;
 }
@@ -322,8 +406,10 @@ nav {
 }
 
 .input-area {
+    position: relative;
     display: inline-block;
     width: 100%;
+    height: 30px;
 }
 
 .input__record-cat {
@@ -350,9 +436,32 @@ nav {
     text-align: center;
     padding: 2px;
 }
+
+.button__file {
+    background-color: #ddd;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    transition-property: box-shadow;
+    transition-duration: .2s;
+}
+
+.button__file:hover {
+    box-shadow: 0 2px rgba(0, 0, 0, .4);
+}
+
+.button__file:active {
+    position: absolute;
+    top: 2px;
+    box-shadow: none;
+}
+
+
 /* wrapper-1ここまで */
 
+
 /*  */
+
 .js-preaviewImage {
     width: 90%;
 }
@@ -362,10 +471,15 @@ nav {
     margin-top: 40px;
 }
 
+
 /*  */
+
+
 /* record-cat.phpここまで */
 
+
 /* edit-cat-select.phpここから */
+
 .images-area {
     margin-bottom: 40px;
     display: flex;
@@ -373,11 +487,13 @@ nav {
     align-items: center;
     flex-wrap: wrap;
 }
+
 .images-area:before,
 .images-area:after {
     content: "";
     width: 21%;
 }
+
 .images-area:before {
     order: 1;
 }
@@ -406,16 +522,18 @@ nav {
     background-color: rgba(200, 200, 200, .8);
     color: #000;
 }
+
+
 /* edit-cat-select.phpここまで */
 
 
 /* iPad以下 */
+
 @media screen and (max-width: 768px) {
     /* 共通ここから */
     html {
         font-size: 12px;
     }
-
     .inner {
         width: 90%;
     }
@@ -424,39 +542,39 @@ nav {
         padding: 20px 0 5px 0;
     }
     /* 共通ここまで */
-
     /* headerここから */
     .nav-pc {
         display: none;
         width: 100%;
     }
-
     .nav-mobile {
         display: block;
     }
-
     .toggle {
         display: flex !important;
         padding: 10px;
     }
-
     .menu-list {
         display: block !important;
     }
     /* headerここまで */
-
     .menu-button {
         width: 40%;
         font-size: .6em;
         margin-bottom: 40px;
     }
+    /* record-cat.phpここから */
+    /* wrapper-1ここから */
+    .inner__record-cat {
+        width: 60% !important;
+    }
+    /* record-cat.phpここまで */
 }
 
 @media screen and (max-width: 376px) {
     html {
         font-size: 8px;
     }
-
     .inner {
         width: 95%;
     }

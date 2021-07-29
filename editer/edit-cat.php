@@ -47,7 +47,6 @@ try {
 
             // 元のデータを削除
             unlink("." . $cat["image"]);
-
         } else {
             $file_name = $cat["image"];
         }
@@ -65,7 +64,6 @@ try {
         $cat["gender"] = $_POST["gender"];
         $cat["birthday"] = $_POST["birthday"];
         $cat["image"] = $file_name;
-
     }
 } catch (Exception $e) {
     echo "エラー：" . $e->getMessage();
@@ -78,7 +76,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.1">
-    <link rel="stylesheet" href="./style.css?ver=1.7">
+    <link rel="stylesheet" href="./style.css?ver=1.8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>@TODO</title>
@@ -203,16 +201,19 @@ try {
                     <img class="js-trimmedImg" id="preview" src=<?php echo "." . $cat["image"]; ?> alt="">
                     <input class="save_image" id="save_image" type="hidden" name="save_image" value=<?php echo "." . $cat["image"]; ?>>
 
+                    <!-- 削除ボタン -->
+                    <input class="delete" id="delete" name="delete" type="submit" value="delete" style="display: none">
+                    <div class="inline-outside__center"><label class="label__delete" for="delete">この猫を削除</label></div>
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#myModal" style="display:none">
                     </button>
-                    <div class="modal fade js-trimmingModal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
+                    <div class="modal fade js-trimmingModal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h4 class="modal-title">トリミンングしてください</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="trimming-area">
@@ -246,7 +247,7 @@ try {
 
     <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
     <script src="js/vendor/cropper.js"></script>
-    <script src="js/page/trimming.js?ver=0.1"></script>
+    <script src="js/page/trimming.js?ver=0.2"></script>
 </body>
 
 </html>
