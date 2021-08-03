@@ -10,41 +10,43 @@ try {
     }
 
     // データベース書き込み
-    if (!isset($post["error_cat"]) && isset($_POST["save"])) {
-        // 保存するファイル名をidから取得
-        $id = $db->prepare("SELECT MAX(id) FROM cats");
-        $id->execute();
-        $file_name = $id->fetch(PDO::FETCH_ASSOC);
-        $file_name = (int)$file_name["MAX(id)"] + 1;
-        if (strlen($file_name) === 1) {
-            $file_name = "000" . $file_name;
-        } elseif (strlen($file_name) === 2) {
-            $file_name = "00" . $file_name;
-        } elseif (strlen($file_name) === 3) {
-            $file_name = "0" . $file_name;
+    if (isset($_POST["save"])) {
+        if (!isset($post["error_cat"])) {
+            // 保存するファイル名をidから取得
+            $id = $db->prepare("SELECT MAX(id) FROM cats");
+            $id->execute();
+            $file_name = $id->fetch(PDO::FETCH_ASSOC);
+            $file_name = (int)$file_name["MAX(id)"] + 1;
+            if (strlen($file_name) === 1) {
+                $file_name = "000" . $file_name;
+            } elseif (strlen($file_name) === 2) {
+                $file_name = "00" . $file_name;
+            } elseif (strlen($file_name) === 3) {
+                $file_name = "0" . $file_name;
+            }
+    
+            // データベース書き込み
+            $post["image"] = "./cats/" . $file_name . ".jpg";
+            $write = $db->prepare("INSERT INTO cats SET name=?, gender=?, birthday=?, image=?");
+            $write->execute(array(
+                $post["name"],
+                $post["gender"],
+                $post["birthday"] . "-01",
+                $post["image"]
+            ));
+    
+            // base64の画像データを保存
+            if (!file_exists("../cats/")) {
+                mkdir("../cats/");
+            }
+            $img = $_POST["save_image"];
+            $img = str_replace("data:image/png;base64,", "", $img);
+            $img = str_replace(" ", "+", $img);
+            $save_image = base64_decode($img);
+            file_put_contents("../cats/" . $file_name . ".jpg", $save_image);
+        // } else {
+
         }
-
-        // データベース書き込み
-        $post["image"] = "./cats/" . $file_name . ".jpg";
-        $write = $db->prepare("INSERT INTO cats SET name=?, gender=?, birthday=?, image=?");
-        $write->execute(array(
-            $post["name"],
-            $post["gender"],
-            $post["birthday"] . "-01",
-            $post["image"]
-        ));
-
-        // base64の画像データを保存
-        if (!file_exists("../cats/")) {
-            mkdir("../cats/");
-        }
-        $img = $_POST["save_image"];
-        $img = str_replace("data:image/png;base64,", "", $img);
-        $img = str_replace(" ", "+", $img);
-        $save_image = base64_decode($img);
-        file_put_contents("../cats/" . $file_name . ".jpg", $save_image);
-        // move_uploaded_file($_POST["save_image"], "../cats/" . $file_name . ".jpg");
-
     }
 } catch (Exception $e) {
     echo "エラー：" . $e->getMessage();
@@ -61,17 +63,9 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>@TODO</title>
-
-    <!-- https://github.com/yuki-yoshida-z/demoes/blob/master/trimming.html参照 -->
-    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no"> -->
     <meta http-equiv="Content-Style-Type" content="text/css">
     <meta http-equiv="Content-Script-Type" content="text/javascript">
-    <!-- <link rel="stylesheet" href="css/base/reset.css" type="text/css">
-    <link rel="stylesheet" href="css/base/layout.css" type="text/css"> -->
     <link rel="stylesheet" href="css/vendor/cropper.css" type="text/css">
-    <!-- <link rel="stylesheet" href="css/vendor/bootstrap.min.css" type="text/css"> -->
-    <!-- <link rel="stylesheet" href="css/page/trimming.css" type="text/css"> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 
@@ -90,20 +84,20 @@ try {
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
                     <a class="header header__menu header__menu-1" href="./edit-cat-select.php">
-                        <div class="header__menu-2-1">EDIT</div>
+                        <div class="header__menu-2-1">CAT-EDIT</div>
                         <div class="header__menu-2-2">猫ちゃん編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a class="header header__menu header__menu-1" href="#scroll-5">
-                        <div class="header__menu-3-1">WORK</div>
-                        <div class="header__menu-3-2">出勤ステータス</div>
+                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                        <div class="header__menu-3-1">TOP-EDIT</div>
+                        <div class="header__menu-3-2">トップページ編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                    <a href="../" class="header header__menu header__menu-1">
                         <div class="header__menu-4-1">TOP-PAGE</div>
-                        <div class="header__menu-4-2">トップページ編集</div>
+                        <div class="header__menu-4-2">トップページ</div>
                     </a>
                 </div>
             </div>
@@ -111,7 +105,7 @@ try {
 
         <nav class="navbar navbar-expand-lg navbar-light nav-mobile">
             <div class="toggle">
-                <a class="navbar-brand" href="#scroll-1">
+                <a class="navbar-brand" href="./">
                     <div class="nav__logo-area_sp">
                         <!-- <div class="nav__logo-item col-4 px-0"><img src="./images/logo.webp" alt="ロゴ"></div> -->
                         <div class="nav__logo-name"><span class="nav__logo-name_bold">編集画面</span></div>
@@ -131,9 +125,6 @@ try {
                             <a class="nav-link" href="./edit-cat-select.php">猫ちゃん編集</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#scroll-5">出勤ステータス</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="./edit-top.php">トップページ編集</a>
                         </li>
                     </ul>
@@ -149,30 +140,30 @@ try {
                 <div class="inner inner__record-cat inner-1">
                     <div class="item item-1">
                         <div class="item-name">名前</div>
-                        <?php if (!empty($post["error"]["name"]) && $post["error"]["name"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                        <div class="input-area"><input class="input__record-cat name text__record-cats" id="name" name="name" type="text" placeholder="名前"></div>
+                        <?php if (!empty($post["error_cat"]["name"]) && $post["error_cat"]["name"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
+                        <div class="input-area"><input class="input__record-cat name text__record-cats" id="name" name="name" type="text" value="<?php if (isset($post["name"])) echo $post["name"]; ?>" placeholder="名前"></div>
                     </div>
 
                     <div class="item item-2">
                         <div class="item-name">誕生日</div>
-                        <?php if (!empty($post["error"]["birthday"]) && $post["error"]["birthday"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="month"></div>
+                        <?php if (!empty($post["error_cat"]["birthday"]) && $post["error_cat"]["birthday"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
+                        <div class="input-area"><input class="input__record-cat birthday date__record-cats" id="birthday" name="birthday" type="month" value="<?php if (isset($post["birthday"])) echo $post["birthday"]; ?>"></div>
                     </div>
 
                     <div class="item item-3">
                         <div class="item-name">性別</div>
-                        <?php if (!empty($post["error"]["gender"]) && $post["error"]["gender"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
+                        <?php if (!empty($post["error_cat"]["gender"]) && $post["error_cat"]["gender"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
                         <div class="input-area">
                             <select class="gender select__gender" id="gender" name="gender">
-                                <option value="オス">オス</option>
-                                <option value="メス">メス</option>
+                                <option value="オス" <?php if (isset($post["gender"]) and $post["gender"] === "オス") echo "selected" ?>>オス</option>
+                                <option value="メス" <?php if (isset($post["gender"]) and $post["gender"] === "メス") echo "selected" ?>>メス</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="item item-3">
                         <div class="item-name">写真</div>
-                        <?php if (!empty($post["error"]["image"]) && $post["error"]["image"] === "none") echo "<div class='error' style='color:red;'>ファイルを選択してください</div>"; ?>
+                        <?php if (!empty($post["error_cat"]["save_image"]) && $post["error_cat"]["save_image"] === "none") echo "<div class='error' style='color:red;'>ファイルを選択してください</div>"; ?>
                         <div class="input-area">
                             <input class="image text__record-cats js-imageFile" id="image-file" name="image" type="file" accept="image/*" style="display: none">
                             <label class="button__file" for="image-file">ファイルを選択</label>
@@ -180,9 +171,9 @@ try {
                         </div>
                     </div>
 
-                    <img class="js-trimmedImg" id="preview" src="" alt="">
+                    <img class="js-trimmedImg" id="preview" src="<?php if (isset($post["save_image"])) { echo $post["save_image"]; } elseif (isset($_POST["hidden_image"])) { echo $_POST["hidden_image"]; } ?>" alt="">
                     <input class="save_image" id="save_image" type="hidden" name="save_image" value="">
-
+                    <input type="hidden" name="hidden_image" value="<?php if (isset($post["save_image"])) { echo $post["save_image"]; } elseif (isset($_POST["hidden_image"])) { echo $_POST["hidden_image"]; } ?>">
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary modal-btn" data-bs-toggle="modal" data-bs-target="#myModal" style="display:none">

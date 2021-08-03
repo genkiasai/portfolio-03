@@ -13,16 +13,21 @@ body {
 }
 
 body::before {
-    background: url("./images/background.png") no-repeat center;/* 画像（ここにfixedは入れない） */
-    background-size: cover;/* cover指定できる */
+    background: url("./images/background.png") no-repeat center;
+    /* 画像（ここにfixedは入れない） */
+    background-size: cover;
+    /* cover指定できる */
     content: "";
     display: block;
-    position: fixed;/* 擬似要素ごと固定 */
+    position: fixed;
+    /* 擬似要素ごと固定 */
     top: 0;
     left: 0;
     z-index: -1;
-    width: 100%;/* 横幅いっぱい */
-    height: 100vh;/* 縦幅いっぱい */
+    width: 100%;
+    /* 横幅いっぱい */
+    height: 100vh;
+    /* 縦幅いっぱい */
 }
 
 header {
@@ -71,7 +76,10 @@ nav {
 .no-margin {
     margin: 0;
 }
+
+
 /* headerここから */
+
 .nav-pc {
     width: 100%;
 }
@@ -170,10 +178,16 @@ nav {
 .navbar-collapse {
     padding-bottom: .5rem;
 }
+
+
 /* headerここまで */
 
+
 /* index.phpここから */
+
+
 /* wrapper-1ここから */
+
 .wrapper-1 {
     background-image: url("./images/catch-copy-lg.png");
     background-attachment: fixed;
@@ -194,9 +208,12 @@ nav {
     min-width: 180px;
 }
 
+
 /* wrapper-1ここまで */
 
+
 /* wrapper-2ここから */
+
 .info-area {
     margin-top: 10px;
     height: 200px;
@@ -220,9 +237,13 @@ nav {
 .sentence {
     text-align: left;
 }
+
+
 /* wrapper-2ここまで */
 
+
 /* wrapper-3ここから */
+
 .images-area {
     margin-bottom: 40px;
     display: flex;
@@ -230,11 +251,13 @@ nav {
     align-items: center;
     flex-wrap: wrap;
 }
+
 .images-area:before,
 .images-area:after {
     content: "";
     width: 21%;
 }
+
 .images-area:before {
     order: 1;
 }
@@ -264,12 +287,16 @@ nav {
     color: #000;
 }
 
+
 /* wrapper-3ここまで */
 
+
 /* wrapper-4ここから */
+
 .inner-4 {
     padding-top: 80px;
 }
+
 .message {
     width: 30%;
     height: 200px;
@@ -288,9 +315,13 @@ nav {
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+
 /* wrapper-4ここまで */
 
+
 /* wrapper-5ここから */
+
 .inner-5 {
     padding-top: 40px;
 }
@@ -311,9 +342,12 @@ nav {
     margin-bottom: 40px;
 }
 
+
 /* wrapper-5ここまで */
 
+
 /* wrapper-6ここから */
+
 .access-area {
     margin-top: 20px;
 }
@@ -336,76 +370,71 @@ nav {
 .sentence {
     text-align: left;
 }
+
+
 /* wrapper-6ここまで */
 
+
 /* wrapper-7ここから */
+
 .inner-7 {
     padding-top: 60px;
 }
+
 .caution {
     color: #fff;
     text-align: left;
     font-size: .6em;
     margin-bottom: 60px;
 }
+
+
 /* wrapper-7ここまで */
 
+
 /* iPad Pro */
-@media  screen and (max-width: 1200px) {
+
+@media screen and (max-width: 1200px) {
     .inner {
         width: 80%;
     }
-
     /* headerここから */
     .nav-pc {
         width: 100%;
     }
-
     .header__contents {
         font-size: .8em;
     }
-
     /* wrapper-1ここから */
     .wrapper-1 {
         background-image: url("./images/catch-copy-lg.png");
         background-size: 100vw;
         height: 400px;
     }
-
     .wrapper-1__catch-copy {
         width: 40%;
         font-size: 2.3rem;
     }
     /* wrapper-1ここまで */
-
     /* wrapper-2ここから */
     .info {
         font-size: 1.0em;
     }
     /* wrapper-2ここまで */
-
     /* wrapper-3ここから */
-    
     /* wrapper-3ここまで */
-
     /* wrapper-4ここから */
     .inner-4 {
         padding-top: 80px;
     }
-
     .message-area {
         padding-top: 0 !important;
     }
     /* wrapper-4ここまで */
-
     /* wrapper-5ここから */
-    
     /* wrapper-5ここまで */
-
     /* wrapper-6ここから */
-    
     /* wrapper-6ここまで */
-
     /* wrapper-7ここから */
     .inner-7 {
         padding-top: 40px;
@@ -413,65 +442,56 @@ nav {
     /* wrapper-7ここまで */
 }
 
+
 /* iPad以下 */
+
 @media screen and (max-width: 768px) {
     .wrapper__h2 {
         font-size: 1.5rem;
         margin-bottom: 15px;
         padding: 20px 0 5px 0;
     }
-
     .inner {
         width: 90%;
     }
-
     /* headerここから */
     .nav-pc {
         display: none;
         width: 100%;
     }
-
     .nav-mobile {
         display: block;
     }
-
     .toggle {
         display: flex !important;
         padding: 10px;
     }
-
     .menu-list {
         display: block !important;
     }
     /* headerここまで */
-
     /* wrapper-1ここから */
     .wrapper-1 {
         background-image: url("./images/catch-copy-sm.png");
         background-size: contain;
         height: 300px;
     }
-
     .wrapper-1__catch-copy {
         font-size: 2.0rem;
     }
     /* wrapper-1ここまで */
-
     /* wrapper-2ここから */
     .info {
         display: block;
-        font-size: .6em;
+        font-size: .8em;
     }
-
     .date {
         width: 100%;
     }
-
     .sentence {
         width: 100%;
     }
     /* wrapper-2ここまで */
-
     /* wrapper-3ここから */
     .images-area {
         display: flex;
@@ -487,49 +507,42 @@ nav {
     .images-area:before {
         order: 1;
     }
-
     .image-area {
         width: 30%;
     }
     /* wrapper-3ここまで */
-
     /* wrapper-4ここから */
     .inner-4 {
         padding-top: 40px;
     }
-
     .message {
         width: 100%;
     }
-
     .message-2 {
-        transform:translate(0);
+        transform: translate(0);
         margin: 20px 0;
     }
-
     .message-area {
         padding-top: 40px;
     }
     /* wrapper-4ここまで */
-
     /* wrapper-5ここから */
     .item_menu {
         font-size: 1.5rem;
     }
     /* wrapper-5ここまで */
-
     /* wrapper-6ここから */
     .access {
-        font-size: .6em;
+        font-size: .8em;
     }
     /* wrapper-6ここまで */
-
     /* wrapper-7ここから */
-    
     /* wrapper-7ここまで */
 }
 
+
 /* iPhoneX以下 */
+
 @media screen and (max-width: 376px) {
     /* wrapper-3ここから */
     .intro {
@@ -540,35 +553,33 @@ nav {
     .inner__menu {
         width: 80%;
     }
-
     .item_menu {
         font-size: 1.2rem;
     }
     /* wrapper-5ここまで */
 }
+
+
 /* index.phpここまで */
 
-
-
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 10px;
 }
-::-webkit-scrollbar-track{
+
+::-webkit-scrollbar-track {
     background: #fff;
     border-left: solid 1px #ececec;
 }
-::-webkit-scrollbar-thumb{
+
+::-webkit-scrollbar-thumb {
     background: #ccc;
     border-radius: 10px;
     box-shadow: inset 0 0 0 2px #fff;
 }
 
 
-
-
-
-
 /* 編集画面ボタン@TODO 一時的 */
+
 .button__edit--a {
     display: inline-block;
     position: fixed;
@@ -592,4 +603,6 @@ nav {
     box-shadow: 0 0 20px rgba(0, 0, 0, .7);
     opacity: 1;
 }
+
+
 /* 編集画面ボタン@TODO 一時的 */

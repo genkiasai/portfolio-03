@@ -32,7 +32,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css?ver=0.8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>ポートフォリオ</title>
+    <title>ねこCafe</title>
 </head>
 
 <body>
@@ -40,7 +40,7 @@ try {
         <!-- 会社名 -->
         <nav class="nav-pc">
             <div class="row">
-                <div class="col-xl-4 col-sm-4 header__contents header__contents-1"><a class="header header__company-name" href="./">ポートフォリオ</a></div>
+                <div class="col-xl-4 col-sm-4 header__contents header__contents-1"><a class="header header__company-name" href="./">ねこCafe</a></div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
                     <a class="header header__menu header__menu-1" href="./">
                         <div class="header__menu-1-1">HOME</div>
@@ -72,7 +72,7 @@ try {
             <div class="toggle">
                 <a class="navbar-brand" href="#scroll-1">
                     <div class="nav__logo-area_sp">
-                        <div class="nav__logo-name"><span class="nav__logo-name_bold">ポートフォリオ</span></div>
+                        <div class="nav__logo-name"><span class="nav__logo-name_bold">ねこCafe</span></div>
                     </div>
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

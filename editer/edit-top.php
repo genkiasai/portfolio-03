@@ -57,7 +57,6 @@ try {
 } catch (Exception $e) {
     echo "エラー：" . $e->getMessage();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -68,7 +67,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css?ver=1.4">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>@TODO</title>
+    <title>ねこCafe</title>
 </head>
 
 <body>
@@ -83,21 +82,21 @@ try {
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a class="header header__menu header__menu-1" href="#scroll-3">
-                        <div class="header__menu-2-1">EDIT</div>
+                    <a class="header header__menu header__menu-1" href="./edit-cat-select.php">
+                        <div class="header__menu-2-1">CAT-EDIT</div>
                         <div class="header__menu-2-2">猫ちゃん編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a class="header header__menu header__menu-1" href="#scroll-5">
-                        <div class="header__menu-3-1">WORK</div>
-                        <div class="header__menu-3-2">出勤ステータス</div>
+                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                        <div class="header__menu-3-1">TOP-EDIT</div>
+                        <div class="header__menu-3-2">トップページ編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                    <a href="../" class="header header__menu header__menu-1">
                         <div class="header__menu-4-1">TOP-PAGE</div>
-                        <div class="header__menu-4-2">トップページ編集</div>
+                        <div class="header__menu-4-2">トップページ</div>
                     </a>
                 </div>
             </div>
@@ -105,7 +104,7 @@ try {
 
         <nav class="navbar navbar-expand-lg navbar-light nav-mobile">
             <div class="toggle">
-                <a class="navbar-brand" href="#scroll-1">
+                <a class="navbar-brand" href="./">
                     <div class="nav__logo-area_sp">
                         <!-- <div class="nav__logo-item col-4 px-0"><img src="./images/logo.webp" alt="ロゴ"></div> -->
                         <div class="nav__logo-name"><span class="nav__logo-name_bold">編集画面</span></div>
@@ -123,9 +122,6 @@ try {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#scroll-3">猫ちゃん編集</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scroll-5">出勤ステータス</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./edit-top.php">トップページ編集</a>
@@ -223,7 +219,7 @@ try {
                                     <div class="info-data date date-<?php echo $info["id"]; ?>"><?php echo $info["year"] . "/" . $info["month"] . "/" . $info["day"]; ?></div>
                                     <div class="info-data sentence-button">
                                         <div class="sentence sentence-<?php echo $info["id"]; ?>"><?php echo h($info["info"]); ?></div>
-                                        <a href="./top-page.php?delete=<?php echo $info["id"]; ?>">削除</a>
+                                        <a href="./edit-top.php?delete=<?php echo $info["id"]; ?>">削除</a>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
@@ -234,18 +230,6 @@ try {
 
             <div class="wrapper wrapper-3">
                 <div class="inner inner-3">
-                    <h2 class="wrapper__h2">メッセージ</h2>
-                    <?php if (!empty($post["error"]["message_1"]) && $post["error"]["message_1"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                    <textarea class="textarea textarea__message" id="textarea__message-1" name="message_1" cols="30" rows="10"><?php echo h($export["message_1"]); ?></textarea>
-                    <?php if (!empty($post["error"]["message_2"]) && $post["error"]["message_2"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                    <textarea class="textarea textarea__message" id="textarea__message-2" name="message_2" cols="30" rows="10"><?php echo h($export["message_2"]); ?></textarea>
-                    <?php if (!empty($post["error"]["message_3"]) && $post["error"]["message_3"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
-                    <textarea class="textarea textarea__message" id="textarea__message-3" name="message_3" cols="30" rows="10"><?php echo h($export["message_3"]); ?></textarea>
-                </div>
-            </div>
-
-            <div class="wrapper wrapper-4">
-                <div class="inner inner-4">
                     <h2 class="wrapper__h2">アクセス</h2>
                     <?php if (!empty($post["error"]["address"]) && $post["error"]["address"] === "none") echo "<div class='error' style='color:red;'>入力してください</div>"; ?>
                     <div class="accsess__item">

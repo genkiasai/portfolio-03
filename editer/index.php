@@ -23,20 +23,20 @@
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
                     <a class="header header__menu header__menu-1" href="./edit-cat-select.php">
-                        <div class="header__menu-2-1">EDIT</div>
+                        <div class="header__menu-2-1">CAT-EDIT</div>
                         <div class="header__menu-2-2">猫ちゃん編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a class="header header__menu header__menu-1" href="#scroll-5">
-                        <div class="header__menu-3-1">WORK</div>
-                        <div class="header__menu-3-2">出勤ステータス</div>
+                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                        <div class="header__menu-3-1">TOP-EDIT</div>
+                        <div class="header__menu-3-2">トップページ編集</div>
                     </a>
                 </div>
                 <div class="col-xl-2 col-sm-2 header__contents header__contents-2">
-                    <a href="./edit-top.php" class="header header__menu header__menu-1">
+                    <a href="../" class="header header__menu header__menu-1">
                         <div class="header__menu-4-1">TOP-PAGE</div>
-                        <div class="header__menu-4-2">トップページ編集</div>
+                        <div class="header__menu-4-2">トップページ</div>
                     </a>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light nav-mobile">
             <div class="toggle">
-                <a class="navbar-brand" href="#scroll-1">
+                <a class="navbar-brand" href="./">
                     <div class="nav__logo-area_sp">
                         <!-- <div class="nav__logo-item col-4 px-0"><img src="./images/logo.webp" alt="ロゴ"></div> -->
                         <div class="nav__logo-name"><span class="nav__logo-name_bold">編集画面</span></div>
@@ -64,9 +64,6 @@
                             <a class="nav-link"href="./edit-cat-select.php">猫ちゃん編集</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#scroll-5">出勤ステータス</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="./edit-top.php">トップページ編集</a>
                         </li>
                     </ul>
@@ -79,7 +76,6 @@
         <div class="menu-button-area">
             <a class="menu-button" href="./record-cat.php">猫ちゃん登録</a>
             <a class="menu-button" href="./edit-cat-select.php">猫ちゃん編集</a>
-            <a class="menu-button" href="#">出勤ステータス</a>
             <a class="menu-button" href="./edit-top.php">トップページ編集</a>
         </div>
     </main>
